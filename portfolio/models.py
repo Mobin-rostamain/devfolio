@@ -1,17 +1,30 @@
 from django.db import models
+from django.utils.text import slugify
+
+
+class Technology(models.Model):
+    name = models.CharField(max_length=50, verbose_name="نام تکنولوژی")
+
+    class Meta:
+        verbose_name = "تکنولوژی"
+        verbose_name_plural = "تکنولوژی‌ها"
+
+    def __str__(self):
+        return self.name
 
 
 class Project(models.Model):
     title = models.CharField(max_length=150, verbose_name="عنوان پروژه")
+    slug = models.SlugField(max_length=170, unique=True, blank=True, verbose_name="آدرس یکتا")
     main_image = models.ImageField(
         upload_to='projects/main/',
         verbose_name="تصویر اصلی"
     )
     description = models.TextField(verbose_name="توضیحات")
-    technologies = models.CharField(
-        max_length=255,
-        verbose_name="تکنولوژی‌ها",
-        help_text="با کاما جدا کن، مثال: Django, JavaScript, PostgreSQL"
+    technologies = models.ManyToManyField(
+        Technology,
+        related_name="projects",
+        verbose_name="تکنولوژی‌ها"
     )
     link = models.URLField(
         max_length=200,
@@ -28,6 +41,11 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title, allow_unicode=True)
+        super().save(*args, **kwargs)
 
 
 class ProjectImage(models.Model):

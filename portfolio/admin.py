@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Project, ProjectImage
+from .models import Project, ProjectImage, Technology
 
 
 class ProjectImageInline(admin.TabularInline):
@@ -19,7 +19,9 @@ class ProjectImageInline(admin.TabularInline):
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ['title', 'main_image_preview', 'created_at']
-    search_fields = ['title', 'technologies']
+    search_fields = ['title']
+    filter_horizontal = ['technologies']
+    prepopulated_fields = {'slug': ('title',)}
     inlines = [ProjectImageInline]
 
     def main_image_preview(self, obj):
@@ -27,3 +29,9 @@ class ProjectAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" style="max-height: 60px;" />', obj.main_image.url)
         return "—"
     main_image_preview.short_description = "تصویر"
+
+
+@admin.register(Technology)
+class TechnologyAdmin(admin.ModelAdmin):
+    list_display = ['name']
+    search_fields = ['name']
