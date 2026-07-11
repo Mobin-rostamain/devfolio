@@ -1,0 +1,20 @@
+{% load static %}
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="{% url 'core:home' %}" class="logo">
+            <span class="logo-icon">⬡</span>
+            Devfolio
+        </a>
+        <ul class="nav-links">
+            <li><a href="{% url 'core:home' %}" class="active">خانه</a></li>
+            <li><a href="#">درباره من</a></li>
+            <li><a href="#">پروژه‌ها</a></li>
+            <li><a href="#">وبلاگ</a></li>
+            <li><a href="#">تماس با من</a></li>
+        </ul>
+        <a href="#" class="navbar-cta">
+            بزن بریم
+            <span class="arrow">←</span>
+        </a>
+    </div>
+</nav>
