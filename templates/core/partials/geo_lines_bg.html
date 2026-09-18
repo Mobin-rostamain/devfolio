@@ -1,0 +1,49 @@
+<div id="geo-lines-bg">
+    <svg viewBox="0 0 1152 768" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="geoLineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#8B6F3E" stop-opacity="0.5"/>
+                <stop offset="50%" stop-color="#D4A94D" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#8B6F3E" stop-opacity="0.5"/>
+            </linearGradient>
+            <radialGradient id="geoBgGlow" cx="50%" cy="30%" r="60%">
+                <stop offset="0%" stop-color="#1a1a1a"/>
+                <stop offset="100%" stop-color="#050505"/>
+            </radialGradient>
+            <radialGradient id="geoNodeGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FFF6E0" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#D4A94D" stop-opacity="0"/>
+            </radialGradient>
+        </defs>
+
+        <rect x="0" y="0" width="1152" height="768" fill="url(#geoBgGlow)"/>
+
+        <g class="geo-line-group" fill="none" stroke="url(#geoLineGradient)" stroke-width="2">
+            <!-- خطوط اصلی راست، تشکیل‌دهنده‌ی لوزی مرکزی -->
+            <path class="geo-line" d="M 650,-20 L 260,330 L 650,790" />
+            <path class="geo-line" d="M 650,-20 L 1030,330 L 650,790" />
+
+            <!-- خطوط مورب اضافه از گوشه‌ها -->
+            <path class="geo-line" d="M -20,260 L 420,-20" />
+            <path class="geo-line" d="M -20,420 L 700,-20" />
+            <path class="geo-line" d="M 1172,260 L 750,-20" />
+            <path class="geo-line" d="M 1172,420 L 480,-20" />
+            <path class="geo-line" d="M -20,520 L 470,788" />
+            <path class="geo-line" d="M -20,650 L 720,788" />
+            <path class="geo-line" d="M 1172,520 L 700,788" />
+            <path class="geo-line" d="M 1172,650 L 460,788" />
+
+            <!-- دو خط منحنی S شکل، سمت چپ و راست -->
+            <path class="geo-line geo-line-curve" d="M 240,-20 C 130,180 340,280 260,420 C 190,540 320,640 470,788" />
+            <path class="geo-line geo-line-curve" d="M 900,-20 C 1010,180 800,300 890,430 C 950,540 830,640 700,788" />
+
+            <!-- گره‌های نورانی تپنده، رو محل تقریبی تقاطع خطوط -->
+            <circle class="geo-node" cx="260" cy="330" r="14" fill="url(#geoNodeGlow)" />
+            <circle class="geo-node geo-node-delay-1" cx="1030" cy="330" r="14" fill="url(#geoNodeGlow)" />
+            <circle class="geo-node geo-node-delay-2" cx="650" cy="-20" r="10" fill="url(#geoNodeGlow)" />
+            <circle class="geo-node geo-node-delay-1" cx="650" cy="790" r="10" fill="url(#geoNodeGlow)" />
+            <circle class="geo-node geo-node-delay-2" cx="420" cy="-20" r="8" fill="url(#geoNodeGlow)" />
+            <circle class="geo-node" cx="750" cy="-20" r="8" fill="url(#geoNodeGlow)" />
+        </g>
+    </svg>
+</div>

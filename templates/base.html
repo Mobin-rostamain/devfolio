@@ -11,24 +11,34 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    <div id="loading-screen">
+        <div class="loader-visual">
+            <div class="loader-ring"></div>
+            <div class="loader-ring loader-ring-delay"></div>
+            <div class="loader-core"></div>
+        </div>
+        <div class="loader-text">
+            در حال بارگذاری تجربه<span class="dot">.</span><span class="dot dot-2">.</span><span class="dot dot-3">.</span>
+        </div>
+    </div>
+
     <div class="grain-overlay"></div>
     <div class="cursor-glow"></div>
     <div id="scene-canvas"></div>
-
+    {% include 'core/partials/brand_logo.html' %}
     {% include 'core/partials/navbar.html' %}
     {% include 'core/partials/sidebar.html' %}
-
+{% include 'core/partials/geo_lines_bg.html' %}
     <main>
         {% block content %}{% endblock %}
     </main>
 
     {% include 'core/partials/footer.html' %}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="{% static 'core/js/scene.js' %}"></script>
-    {% comment %} <script src="{% static 'core/js/background.js' %}"></script> {% endcomment %}
-
     <script src="{% static 'core/js/cursor-glow.js' %}"></script>
+    <script src="{% static 'core/js/loader.js' %}"></script>
+    <script src="{% static 'core/js/brand-logo.js' %}"></script>
+    <script src="{% static 'core/js/geo_lines_bg.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

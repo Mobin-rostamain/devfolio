@@ -412,27 +412,156 @@ ul { list-style: none; }
 /* ===== Footer ===== */
 .footer {
     border-top: 1px solid var(--border-color);
-    padding: 3rem 6rem 1.5rem;
+    padding: 2rem 6rem;
 }
 
-.footer-container { max-width: 1280px; margin: 0 auto; }
-.footer-brand p { color: var(--text-muted); max-width: 400px; margin-top: 0.8rem; line-height: 1.8; }
-
-.footer-bottom {
-    display: flex;
-    justify-content: space-between;
+.footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border-color);
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    gap: 2rem;
 }
 
-.social-links { display: flex; gap: 1.2rem; }
-.social-links a:hover { color: var(--accent-color); }
+.footer-description {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.9;
+    justify-self: start;
+    text-align: right;
+}
+
+.footer-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    justify-self: center;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.footer-copyright {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.footer-social {
+    display: flex;
+    gap: 1.8rem;
+    justify-self: end;
+}
+
+.footer-social a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: color 0.25s ease;
+}
+
+.footer-social a:hover { color: var(--accent-color); }
+
+.social-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--accent-color);
+    flex-shrink: 0;
+}
+
+/* ===== لودینگ اسکرین ===== */
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+#loading-screen.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-visual {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader-core {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFF6E0 0%, #D4A94D 45%, transparent 75%);
+    box-shadow: 0 0 40px rgba(212, 169, 77, 0.55);
+    animation: loaderPulse 1.6s ease-in-out infinite;
+}
+
+.loader-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgba(212, 169, 77, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: loaderRingExpand 2s ease-out infinite;
+}
+
+.loader-ring-delay {
+    animation-delay: 1s;
+}
+
+.loader-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.loader-text .dot {
+    animation: dotBlink 1.4s infinite;
+    opacity: 0;
+}
+
+.dot-2 { animation-delay: 0.2s; }
+.dot-3 { animation-delay: 0.4s; }
+
+@keyframes loaderPulse {
+    0%, 100% { transform: scale(0.85); opacity: 0.85; }
+    50% { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes loaderRingExpand {
+    0% { width: 60px; height: 60px; opacity: 0.6; }
+    100% { width: 170px; height: 170px; opacity: 0; }
+}
+
+@keyframes dotBlink {
+    0%, 20% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
@@ -444,6 +573,16 @@ ul { list-style: none; }
     .hero-bg-glyph { font-size: 8rem; left: 1rem; }
 }
 
+@media (max-width: 900px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+    }
+    .footer-description { text-align: center; }
+    .footer-social { justify-content: center; }
+}
+
 @media (max-width: 768px) {
     .hero { flex-direction: column; text-align: center; }
     .hero-buttons, .scroll-indicator { justify-content: center; }
@@ -451,4 +590,259 @@ ul { list-style: none; }
     .stat-row { border-left: none; border-bottom: 1px solid var(--border-color); }
     .stat-row:last-child { border-bottom: none; }
     .showcase-section { grid-template-columns: 1fr; }
+}
+#brand-logo-container {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+   width:420px;
+height:420px;
+
+    z-index: 150;
+
+    pointer-events: none;
+
+    will-change: transform;
+}
+
+#brand-logo-svg {
+
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+}
+
+/* #brand-logo-path {
+
+    fill: transparent;
+
+    stroke: #D4A94D;
+
+    stroke-width: 8;
+
+    fill-opacity: 0;
+
+    transition:
+        stroke-dashoffset 1.8s ease,
+        fill-opacity 1s ease;
+} */
+
+#brand-logo-path.draw {
+
+    stroke-dashoffset: 0;
+}
+
+#brand-logo-path.filled {
+
+    fill: #D4A94D;
+
+    fill-opacity: 1;
+}
+
+.brand-line {
+
+    position: absolute;
+
+    width: 260px;
+    height: 1px;
+
+    left: 50%;
+    top: 50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #D4A94D,
+            transparent
+        );
+
+    transform-origin: center;
+
+    opacity: .6;
+}
+
+.brand-line-top {
+
+    transform:
+        translate(-50%, -70px);
+}
+
+.brand-line-bottom {
+
+    transform:
+        translate(-50%, 70px);
+}
+
+.logo-spacer {
+
+    display: inline-block;
+
+    width: 26px;
+}
+/* ===================================
+   DEVFOLIO BRAND LOGO ANIMATION
+=================================== */
+
+
+#brand-logo-container {
+
+    position: fixed;
+
+    top:0;
+    left:0;
+
+    width:270px;
+    height:270px;
+
+    z-index:150;
+
+    pointer-events:none;
+
+    transform-origin:center center;
+
+    will-change:transform;
+
+}
+
+
+
+#brand-logo-svg {
+
+    width:100%;
+
+    height:100%;
+
+    overflow:visible;
+
+}
+
+
+
+/* SVG LOGO */
+
+
+#brand-logo-path {
+
+
+filter:
+drop-shadow(0 0 5px rgba(232,196,106,.45))
+drop-shadow(0 0 15px rgba(232,196,106,.15));
+
+
+
+}
+
+
+
+/* GOLD LINES */
+
+
+.brand-line {
+
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+
+    width:260px;
+
+    height:1px;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        transparent,
+        #D4A94D,
+        transparent
+    );
+
+
+    opacity:.45;
+
+}
+
+
+
+.brand-line-top {
+
+
+    transform:
+    translate(-50%,-70px);
+
+
+}
+
+
+
+.brand-line-bottom {
+
+
+    transform:
+    translate(-50%,70px);
+
+
+}
+
+
+
+/* NAVBAR SPACE */
+
+
+.logo-spacer {
+
+
+    display:inline-block;
+
+    width:26px;
+
+
+}
+/* ===== پس‌زمینه خطوط هندسی طلایی ===== */
+#geo-lines-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    overflow: hidden;
+}
+
+#geo-lines-bg svg {
+    width: 100%;
+    height: 100%;
+}
+
+.geo-line {
+    filter: drop-shadow(0 0 3px rgba(212, 169, 77, 0.5));
+}
+/* ===== گره‌های نورانی تپنده ===== */
+.geo-node {
+    animation: geoNodePulse 3.2s ease-in-out infinite;
+    opacity: 0.5;
+}
+
+.geo-node-delay-1 { animation-delay: 1s; }
+.geo-node-delay-2 { animation-delay: 2s; }
+
+@keyframes geoNodePulse {
+    0%, 100% { opacity: 0.25; transform: scale(0.8); }
+    50% { opacity: 0.9; transform: scale(1.3); }
+}
+
+.geo-node {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+/* ===== جرقه‌های متحرک روی خطوط ===== */
+.geo-spark {
+    filter: drop-shadow(0 0 4px rgba(212, 169, 77, 0.9));
 }
