@@ -1,0 +1,152 @@
+/* ===== لیست پروژه‌ها ===== */
+.projects-list-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 4rem 6rem 5rem;
+}
+
+.projects-list-subtitle {
+    color: var(--text-muted);
+    margin: -0.5rem 0 2.5rem;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.project-grid-card {
+    display: block;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.project-grid-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-color);
+}
+
+.project-grid-image {
+    height: 190px;
+    overflow: hidden;
+}
+
+.project-grid-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.project-grid-info {
+    padding: 1.2rem;
+}
+
+.project-grid-info h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.7rem;
+}
+
+.project-grid-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent-color);
+    border: 1px solid var(--border-color);
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+}
+
+.projects-empty {
+    color: var(--text-muted);
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 0;
+}
+
+/* ===== جزئیات پروژه ===== */
+.project-detail-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+}
+
+.project-detail-header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+.project-detail-main-image {
+    margin: 2rem 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.project-detail-main-image img {
+    width: 100%;
+    display: block;
+}
+
+.project-detail-body {
+    margin-bottom: 3rem;
+}
+
+.project-detail-description {
+    color: var(--text-muted);
+    line-height: 2;
+    margin-bottom: 1.8rem;
+    font-size: 1rem;
+}
+
+.project-gallery {
+    margin-bottom: 2.5rem;
+}
+
+.project-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.project-gallery-item {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.project-gallery-item img {
+    width: 100%;
+    display: block;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .projects-list-section {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    .project-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'portfolio/css/portfolio.css' %}">
+{% endblock %}
+
+{% block brand_logo %}{% endblock %}
+
+{% block content %}
+
+<section class="projects-list-section">
+    <span class="path-tag">~/devfolio/projects</span>
+    <h1 class="section-title">پروژه‌ها</h1>
+    <p class="projects-list-subtitle">مجموعه‌ای از پروژه‌هایی که طراحی و توسعه داده‌ام</p>
+
+    <div class="projects-grid">
+        {% for project in projects %}
+        <a href="{% url 'projects:project_detail' project.slug %}" class="project-grid-card">
+            <div class="project-grid-image">
+                <img src="{{ project.main_image.url }}" alt="{{ project.title }}">
+            </div>
+            <div class="project-grid-info">
+                <h3>{{ project.title }}</h3>
+                <div class="project-grid-tech">
+                    {% for tech in project.technologies.all %}
+                        <span class="tech-chip">{{ tech.name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </a>
+        {% empty %}
+        <p class="projects-empty">هنوز پروژه‌ای اضافه نشده.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

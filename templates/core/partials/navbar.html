@@ -5,16 +5,24 @@
             <span class="logo-spacer"></span>
             Devfolio
         </a>
-        <ul class="nav-links">
+
+        <ul class="nav-links" id="navLinks">
             <li><a href="{% url 'core:home' %}" class="active">خانه</a></li>
-            <li><a href="#">درباره من</a></li>
-            <li><a href="#">پروژه‌ها</a></li>
+            <li><a href="{% url 'about:about_page' %}">درباره من</a></li>
+            <li><a href="{% url 'projects:project_list' %}">پروژه‌ها</a></li>
             <li><a href="#">وبلاگ</a></li>
             <li><a href="#">تماس با من</a></li>
         </ul>
+
         <a href="#" class="navbar-cta">
             بزن بریم
             <span class="arrow">←</span>
         </a>
+
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="باز کردن منو">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
     </div>
 </nav>

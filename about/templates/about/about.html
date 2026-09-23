@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block brand_logo %}{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'about/css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- بیوگرافی -->
+<section class="about-hero">
+    <span class="path-tag">~/devfolio/about</span>
+
+    <div class="about-hero-inner">
+        <div class="about-photo-wrap">
+            {% if bio.profile_photo %}
+                <img src="{{ bio.profile_photo.url }}" alt="{{ bio.headline }}" class="about-photo">
+            {% endif %}
+        </div>
+        <div class="about-info">
+            <h1 class="about-headline">{{ bio.headline|default:"" }}</h1>
+            <p class="about-bio-text">{{ bio.bio_text|default:""|linebreaks }}</p>
+            <div class="about-meta">
+                {% if bio.location %}
+                    <span class="about-meta-item">📍 {{ bio.location }}</span>
+                {% endif %}
+                {% if bio.email %}
+                    <span class="about-meta-item">✉ {{ bio.email }}</span>
+                {% endif %}
+            </div>
+            {% if bio.resume_file %}
+                <a href="{{ bio.resume_file.url }}" class="btn btn-primary" download>دانلود رزومه</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- مهارت‌ها -->
+<section class="about-skills">
+    <span class="path-tag">~/devfolio/about/skills</span>
+    <h2 class="section-title">مهارت‌ها</h2>
+
+    {% for category_label, category_skills in skills_by_category.items %}
+    <div class="skill-category-block">
+        <h3 class="skill-category-title">{{ category_label }}</h3>
+        <div class="skill-bars">
+            {% for skill in category_skills %}
+            <div class="skill-bar-row">
+                <div class="skill-bar-label">
+                    {% if skill.icon %}
+                        <img src="{{ skill.icon.url }}" alt="{{ skill.name }}" class="skill-icon-img">
+                    {% endif %}
+                    <span>{{ skill.name }}</span>
+                </div>
+                <div class="skill-bar-track">
+                    <div class="skill-bar-fill" style="width: {{ skill.proficiency }}%;"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+<!-- تایم‌لاین -->
+<section class="about-timeline">
+    <span class="path-tag">~/devfolio/about/timeline</span>
+    <h2 class="section-title">سوابق تحصیلی و شغلی</h2>
+
+    <div class="timeline-track">
+        {% for entry in timeline %}
+        <div class="timeline-item timeline-item-{{ entry.entry_type }}">
+            <span class="timeline-dot"></span>
+            <div class="timeline-content">
+                <span class="timeline-type-tag">{{ entry.get_entry_type_display }}</span>
+                <h4 class="timeline-title">{{ entry.title }}</h4>
+                <p class="timeline-org">{{ entry.organization }}</p>
+                <p class="timeline-date">
+                    {{ entry.start_date|date:"Y" }} —
+                    {% if entry.end_date %}{{ entry.end_date|date:"Y" }}{% else %}اکنون{% endif %}
+                </p>
+                {% if entry.description %}
+                    <p class="timeline-desc">{{ entry.description }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

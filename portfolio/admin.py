@@ -11,14 +11,16 @@ class ProjectImageInline(admin.TabularInline):
 
     def image_preview(self, obj):
         if obj.image:
-            return format_html('<img src="{}" style="max-height: 80px;" />', obj.image.url)
+            return format_html('<img src="{}" style="max-height: 80px; border-radius: 4px;" />', obj.image.url)
         return "—"
     image_preview.short_description = "پیش‌نمایش"
 
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ['title', 'main_image_preview', 'created_at']
+    list_display = ['title', 'main_image_preview', 'is_featured', 'created_at']
+    list_filter = ['is_featured', 'technologies']
+    list_editable = ['is_featured']
     search_fields = ['title']
     filter_horizontal = ['technologies']
     prepopulated_fields = {'slug': ('title',)}
@@ -26,7 +28,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
     def main_image_preview(self, obj):
         if obj.main_image:
-            return format_html('<img src="{}" style="max-height: 60px;" />', obj.main_image.url)
+            return format_html('<img src="{}" style="max-height: 60px; border-radius: 4px;" />', obj.main_image.url)
         return "—"
     main_image_preview.short_description = "تصویر"
 

@@ -33,7 +33,10 @@ class Project(models.Model):
         verbose_name="لینک سایت"
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
-
+    is_featured = models.BooleanField(
+        default=False,
+        verbose_name="نمایش در پروژه‌های منتخب"
+    )
     class Meta:
         verbose_name = "پروژه"
         verbose_name_plural = "پروژه‌ها"

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'portfolio/css/portfolio.css' %}">
+{% endblock %}
+
+{% block brand_logo %}{% endblock %}
+
+{% block content %}
+
+<section class="project-detail-section">
+    <span class="path-tag">~/devfolio/projects/{{ project.slug }}</span>
+
+    <div class="project-detail-header">
+        <h1>{{ project.title }}</h1>
+        <div class="project-grid-tech">
+            {% for tech in project.technologies.all %}
+                <span class="tech-chip">{{ tech.name }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="project-detail-main-image">
+        <img src="{{ project.main_image.url }}" alt="{{ project.title }}">
+    </div>
+
+    <div class="project-detail-body">
+        <p class="project-detail-description">{{ project.description|linebreaks }}</p>
+<pre>
+    
+</pre>
+        {% if project.link %}
+        <a href="{{ project.link }}" target="_blank" class="btn btn-primary">مشاهده سایت</a>
+        {% endif %}
+    </div>
+
+    {% if project.images.all %}
+    <div class="project-gallery">
+        <h2 class="section-title">گالری تصاویر</h2>
+        <div class="project-gallery-grid">
+            {% for img in project.images.all %}
+            <div class="project-gallery-item">
+                <img src="{{ img.image.url }}" alt="{{ project.title }}">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <a href="{% url 'projects:project_list' %}" class="view-all-link">→ بازگشت به همه‌ی پروژه‌ها</a>
+</section>
+
+{% endblock %}

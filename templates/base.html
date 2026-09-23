@@ -25,7 +25,9 @@
     <div class="grain-overlay"></div>
     <div class="cursor-glow"></div>
     <div id="scene-canvas"></div>
+      {% block brand_logo %}
     {% include 'core/partials/brand_logo.html' %}
+      {% endblock %}
     {% include 'core/partials/navbar.html' %}
     {% include 'core/partials/sidebar.html' %}
 {% include 'core/partials/geo_lines_bg.html' %}
@@ -39,6 +41,7 @@
     <script src="{% static 'core/js/loader.js' %}"></script>
     <script src="{% static 'core/js/brand-logo.js' %}"></script>
     <script src="{% static 'core/js/geo_lines_bg.js' %}"></script>
+    <script src="{% static 'core/js/mobile-menu.js' %}"></script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

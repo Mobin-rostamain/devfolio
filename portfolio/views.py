@@ -3,10 +3,13 @@ from .models import Project
 
 
 def project_list(request):
-    projects = Project.objects.all().order_by("-created_at")
-    return render(request, "projects/project_list.html", {"projects": projects})
+    projects = Project.objects.all().prefetch_related('technologies')
+    return render(request, 'projects/project_list.html', {'projects': projects})
 
 
 def project_detail(request, slug):
-    project = get_object_or_404(Project, slug=slug)
-    return render(request, "projects/project_detail.html", {"project": project})
+    project = get_object_or_404(
+        Project.objects.prefetch_related('technologies', 'images'),
+        slug=slug
+    )
+    return render(request, 'projects/project_detail.html', {'project': project})
